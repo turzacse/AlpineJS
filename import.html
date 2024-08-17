@@ -6,6 +6,9 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="./../css/tailwind.css">
+    
+    <!-- font awesome  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>[x-cloak] { display: none !important; }</style>
 
@@ -17,14 +20,20 @@
     <!-- Navbar -->
     <nav class="bg-gray-800 p-4">
         <div class="container mx-auto flex justify-between items-center max-w-[960px]">
-            <div class="text-2xl font-bold">
+            <div class="text-2xl bg-[#FCB900] rounded-md p-1 font-bold">
                 <a href="#" class="text-white">
                     <img 
-                    class="w-16 h-16 rounded-sm"
+                    class="w-16 h-16 rounded-md shadow-2xl"
                     src="./public/logo1.jpg" alt="">
                 </a>
             </div>
             <div class="flex items-center space-x-4">
+                <button>
+                    <i class="fa-solid fa-xmark text-2xl mr-2 text-red-500"></i>
+                </button>
+                <button>
+                    <i class="fa-solid fa-upload text-2xl mr-2"></i>
+                </button>
                 <a href="index.html">
                     <button class="bg-blue-500 text-white px-4 py-2 rounded">Login</button>
                 </a>
@@ -104,9 +113,11 @@
         <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[960px]">
             <div>
                 <!-- <h2 class="text-xl font-bold mb-4 uppercase">likes light</h2> -->
-                <a href="index.html">
-                    <img class="h-20 mb-10" src="./public/logo3.jpg" alt="">
-                </a>
+                <div class="p-1 bg-[#FCB900] mb-5 w-56 rounded-md">
+                    <a href="index.html">
+                        <img class="h-20  rounded-md shadow-2xl" src="./public/logo3.jpg" alt="">
+                    </a>
+                </div>
                 <ul class="text-xl text-white">
                     <li> 
                         
@@ -122,12 +133,12 @@
                 <h2 class="text-xl font-bold mb-4">Contact Us</h2>
                 <form action="#" method="POST">
                     <div class="mb-4">
-                        <label for="email" class="block text-sm font-medium">Email</label>
-                        <input type="email" id="footer-email" name="footer-email" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <!-- <label for="email" class="block text-sm font-medium">Email</label> -->
+                        <input placeholder="email" type="email" id="footer-email" name="footer-email" class="w-full px-2 py-1 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                     <div class="mb-4">
-                        <label for="message" class="block text-sm font-medium">Message</label>
-                        <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                        <!-- <label for="message" class="block text-sm font-medium">Message</label> -->
+                        <textarea placeholder=" write your message here..." id="message" name="message" rows="4" class="w-full px-2 py-1 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
                     </div>
                     <!-- <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Send</button> -->
                 </form>
