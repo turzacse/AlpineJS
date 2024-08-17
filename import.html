@@ -18,7 +18,11 @@
     <nav class="bg-gray-800 p-4">
         <div class="container mx-auto flex justify-between items-center max-w-[960px]">
             <div class="text-2xl font-bold">
-                <a href="#" class="text-white">Company Logo</a>
+                <a href="#" class="text-white">
+                    <img 
+                    class="w-16 h-16 rounded-sm"
+                    src="./public/logo1.jpg" alt="">
+                </a>
             </div>
             <div class="flex items-center space-x-4">
                 <a href="index.html">
@@ -29,15 +33,15 @@
     </nav>
 
     <!-- Body -->
-    <main class="container mx-auto p-8 max-w-[960px]">
+    <main class="container mx-auto py-8 max-w-[960px]">
         <!-- First Part -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
             <!-- Left Side -->
-            <div class="bg-gray-800 p-6 rounded-lg" x-data="{ number: 0 }" style="height: 100%;">
+            <div class="bg-[#000000] p-6 rounded-lg" x-data="{ number: 0 }" style="height: 100%;">
                 <div class="flex items-center mb-4">
-                    <button @click="number--" class="bg-blue-500 mr-1 text-white px-2 py-2 rounded-l">-</button>
-                    <input type="number" x-model="number" class="w-full px-4 py-2 bg-gray-700 border border-gray-600 text-gray-100 text-center focus:outline-none">
-                    <button @click="number++" class="bg-blue-500 ml-1 text-white px-2 py-2 rounded-r">+</button>
+                    <button @click="number--" class="bg-[#FCB900]  text-black text-2xl px-2 py-[5px] rounded-l">-</button>
+                    <input type="number" x-model="number" class="w-full px-4 py-2 bg-gray-700 border border-[#aaaaaa] text-gray-100 text-center focus:outline-none">
+                    <button @click="number++" class="bg-[#FCB900]  text-black text-2xl px-2 py-[5px] rounded-r">+</button>
                 </div>
                 <div>
                     <div class="space-y-2">
@@ -62,29 +66,56 @@
                 
             </div>
             <!-- Right Side -->
-            <div class="bg-gray-800 p-6 rounded-lg" style="height: 100%;">
+            <div class="bg-[#000000] p-6 rounded-lg" style="height: 100%;">
                 <!-- <h2 class="text-lg font-medium mb-2">Description</h2> -->
-                <textarea class="w-full h-full px-4 py-2 bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none" placeholder="Write your description here..."></textarea>
+                <textarea class="w-full h-full px-4 py-2 bg-gray-700 border border-[#aaaaaa ] text-gray-100 focus:outline-none" placeholder="Write your description here..."></textarea>
             </div>
         </div>
 
         <!-- Second Part -->
-        <div class="flex justify-center mt-8">
-            <button class="bg-blue-500 text-white px-6 py-2 rounded-lg">Import</button>
+        <div x-data="{ showModal: false }" class="relative">
+            <!-- Import Button -->
+            <div class="flex justify-center mt-8">
+                <button @click="showModal = true" class="bg-[#FCB900] text-black px-6 py-2 rounded-lg">
+                    Import
+                </button>
+            </div>
+        
+            <!-- Modal -->
+            <div x-show="showModal" x-cloak @click.away="showModal = false" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-75 z-50">
+                <div class="bg-[#374151] dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h2 class="text-lg font-bold mb-4 text-white dark:text-gray-100">Success</h2>
+                    <p class="text-white dark:text-gray-300">Your import has been completed successfully.</p>
+                    <div class="mt-6 flex justify-end">
+                        <button @click="showModal = false" class="bg-red-500 text-white px-4 py-2 rounded-lg">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
+        
     </main>
+    
+
 
     <!-- Footer -->
     <footer class="bg-gray-800 py-8 mt-8">
         <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[960px]">
             <div>
-                <h2 class="text-xl font-bold mb-4 uppercase">likes light</h2>
-                <ul>
-                    <li><a href="index.html" class="text-blue-400 hover:text-blue-500">User</a></li>
-                    <li><a href="import.html" class="text-blue-400 hover:text-blue-500">Import</a></li>
-                    <li><a href="search.html" class="text-blue-400 hover:text-blue-500">Search</a></li>
-                    <li><a href="article.html" class="text-blue-400 hover:text-blue-500">Article</a></li>
-                    <li><a href="article-edit.html" class="text-blue-400 hover:text-blue-500">Article Edit</a></li>
+                <!-- <h2 class="text-xl font-bold mb-4 uppercase">likes light</h2> -->
+                <a href="index.html">
+                    <img class="h-20 mb-10" src="./public/logo3.jpg" alt="">
+                </a>
+                <ul class="text-xl text-white">
+                    <li> 
+                        
+                    </li>
+                    <li><a href="index.html" class=" hover:text-blue-500">User</a></li>
+                    <li><a href="import.html" class=" hover:text-blue-500">Import</a></li>
+                    <li><a href="search.html" class=" hover:text-blue-500">Search</a></li>
+                    <li><a href="article.html" class=" hover:text-blue-500">Article</a></li>
+                    <li><a href="article-edit.html" class=" hover:text-blue-500">Article Edit</a></li>
                 </ul>
             </div>
             <div>
@@ -98,7 +129,7 @@
                         <label for="message" class="block text-sm font-medium">Message</label>
                         <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
                     </div>
-                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Send</button>
+                    <!-- <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Send</button> -->
                 </form>
             </div>
             <div>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="utf-8">
+    <title>Search Page</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="./../css/tailwind.css">
+
+    <style>[x-cloak] { display: none !important; }</style>
+
+    <!-- Scripts -->
+    <script defer src="https://unpkg.com/@alpinejs/collapse@3.4.2/dist/cdn.min.js"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.4.2/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-900 text-gray-100">
+    <!-- Navbar -->
+    <!-- <nav class="bg-gray-800 p-4">
+        <div class="container mx-auto flex justify-between items-center max-w-[960px]">
+            <div class="text-2xl font-bold">
+                <a href="#" class="text-white">Company Logo</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button onclick="window.location.href='index.html'" class="bg-blue-500 text-white px-4 py-2 rounded">Login</button>
+            </div>
+        </div>
+    </nav> -->
+
+    <!-- Body -->
+    <div class="container mx-auto max-w-[960px] mt-2 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+        <!-- Sidebar -->
+        <aside class="bg-gray-800 p-6 rounded-lg md:w-1/4">
+            <a href="index.html">
+                <img class="h-20 mb-10" src="./public/logo3.jpg" alt="">
+            </a>
+            <!-- Search Field -->
+            <div class="mb-4">
+                <!-- <label for="search" class="block text-sm font-medium">Search</label> -->
+                <input type="text" id="search" class="w-full px-4 py-2 bg-gray-700 border border-gray-600 text-gray-100 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Search...">
+            </div>
+
+            <!-- Conditional Input Field -->
+            <div class="mb-4" x-data="{ number: 0 }">
+                <!-- <label for="condition" class="block text-sm font-medium">Condition</label> -->
+                <div class="flex items-center">
+                    <button @click="number--" class="bg-blue-500 text-white px-2 py-2 rounded-l">-</button>
+                    <input type="text" id="condition" x-model="number" class="w-full px-4 py-2 bg-gray-700 border border-gray-600 text-gray-100 text-center focus:outline-none">
+                    <button @click="number++" class="bg-blue-500 text-white px-2 py-2 rounded-r">+</button>
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- Search Options -->
+            <div x-data="{ selectedOptions: [] }">
+                <div class=" my-4 grid grid-cols-3 gap-1 text-[12px]">
+                    <div>
+                        <button 
+                            @click="selectedOptions.includes('option1') ? selectedOptions.splice(selectedOptions.indexOf('option1'), 1) : selectedOptions.push('option1')"
+                            :class="selectedOptions.includes('option1') ? 'bg-blue-600 text-white' : 'bg-gray-400 text-gray-800'"
+                            class="w-full py-1 rounded">
+                            Option 1
+                        </button>
+                    </div>
+                    <div>
+                        <button 
+                            @click="selectedOptions.includes('option2') ? selectedOptions.splice(selectedOptions.indexOf('option2'), 1) : selectedOptions.push('option2')"
+                            :class="selectedOptions.includes('option2') ? 'bg-blue-600 text-white' : 'bg-gray-400 text-gray-800'"
+                            class="w-full py-1 rounded">
+                            Option 2
+                        </button>
+                    </div>
+                    <div>
+                        <button 
+                            @click="selectedOptions.includes('option3') ? selectedOptions.splice(selectedOptions.indexOf('option3'), 1) : selectedOptions.push('option3')"
+                            :class="selectedOptions.includes('option3') ? 'bg-blue-600 text-white' : 'bg-gray-400 text-gray-800'"
+                            class="w-full py-1 rounded">
+                            Option 3
+                        </button>
+                    </div>
+                    <div>
+                        <button 
+                            @click="selectedOptions.includes('option4') ? selectedOptions.splice(selectedOptions.indexOf('option4'), 1) : selectedOptions.push('option4')"
+                            :class="selectedOptions.includes('option4') ? 'bg-blue-600 text-white' : 'bg-gray-400 text-gray-800'"
+                            class="w-full py-1 rounded">
+                            Option 4
+                        </button>
+                    </div>
+                    <div>
+                        <button 
+                            @click="selectedOptions.includes('option5') ? selectedOptions.splice(selectedOptions.indexOf('option5'), 1) : selectedOptions.push('option5')"
+                            :class="selectedOptions.includes('option5') ? 'bg-blue-600 text-white' : 'bg-gray-400 text-gray-800'"
+                            class="w-full py-1 rounded">
+                            Option 5
+                        </button>
+                    </div>
+
+                    <div>
+                        <button 
+                            @click="selectedOptions.includes('option6') ? selectedOptions.splice(selectedOptions.indexOf('option6'), 1) : selectedOptions.push('option6')"
+                            :class="selectedOptions.includes('option6') ? 'bg-blue-600 text-white' : 'bg-gray-400 text-gray-800'"
+                            class="w-full py-1 rounded">
+                            Option 6
+                        </button>
+                    </div>
+
+                    <div>
+                        <button 
+                            @click="selectedOptions.includes('option7') ? selectedOptions.splice(selectedOptions.indexOf('option7'), 1) : selectedOptions.push('option7')"
+                            :class="selectedOptions.includes('option7') ? 'bg-blue-600 text-white' : 'bg-gray-400 text-gray-800'"
+                            class="w-full py-1 rounded">
+                            Option 7
+                        </button>
+                    </div>
+                    <div>
+                        <button 
+                            @click="selectedOptions.includes('option8') ? selectedOptions.splice(selectedOptions.indexOf('option8'), 1) : selectedOptions.push('option8')"
+                            :class="selectedOptions.includes('option8') ? 'bg-blue-600 text-white' : 'bg-gray-400 text-gray-800'"
+                            class="w-full py-1 rounded">
+                            Option 8
+                        </button>
+                    </div>
+
+                    <div>
+                        <button 
+                            @click="selectedOptions.includes('option9') ? selectedOptions.splice(selectedOptions.indexOf('option9'), 1) : selectedOptions.push('option9')"
+                            :class="selectedOptions.includes('option9') ? 'bg-blue-600 text-white' : 'bg-gray-400 text-gray-800'"
+                            class="w-full py-1 rounded">
+                            Option 9
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <hr>
+
+            <div x-data="{ selectedOptions: [] }">
+                <div class=" my-4 grid grid-cols-3 gap-1 text-[12px]">
+                    <div>
+                        <button 
+                            @click="selectedOptions.includes('option1') ? selectedOptions.splice(selectedOptions.indexOf('option1'), 1) : selectedOptions.push('option1')"
+                            :class="selectedOptions.includes('option1') ? 'bg-blue-600 text-white' : 'bg-gray-400 text-gray-800'"
+                            class="w-full py-1 rounded">
+                            Option 1
+                        </button>
+                    </div>
+                    <div>
+                        <button 
+                            @click="selectedOptions.includes('option2') ? selectedOptions.splice(selectedOptions.indexOf('option2'), 1) : selectedOptions.push('option2')"
+                            :class="selectedOptions.includes('option2') ? 'bg-blue-600 text-white' : 'bg-gray-400 text-gray-800'"
+                            class="w-full py-1 rounded">
+                            Option 2
+                        </button>
+                    </div>
+                    <div>
+                        <button 
+                            @click="selectedOptions.includes('option3') ? selectedOptions.splice(selectedOptions.indexOf('option3'), 1) : selectedOptions.push('option3')"
+                            :class="selectedOptions.includes('option3') ? 'bg-blue-600 text-white' : 'bg-gray-400 text-gray-800'"
+                            class="w-full py-1 rounded">
+                            Option 3
+                        </button>
+                    </div>
+                    <div>
+                        <button 
+                            @click="selectedOptions.includes('option4') ? selectedOptions.splice(selectedOptions.indexOf('option4'), 1) : selectedOptions.push('option4')"
+                            :class="selectedOptions.includes('option4') ? 'bg-blue-600 text-white' : 'bg-gray-400 text-gray-800'"
+                            class="w-full py-1 rounded">
+                            Option 4
+                        </button>
+                    </div>
+                    <div>
+                        <button 
+                            @click="selectedOptions.includes('option5') ? selectedOptions.splice(selectedOptions.indexOf('option5'), 1) : selectedOptions.push('option5')"
+                            :class="selectedOptions.includes('option5') ? 'bg-blue-600 text-white' : 'bg-gray-400 text-gray-800'"
+                            class="w-full py-1 rounded">
+                            Option 5
+                        </button>
+                    </div>
+
+                    <div>
+                        <button 
+                            @click="selectedOptions.includes('option6') ? selectedOptions.splice(selectedOptions.indexOf('option6'), 1) : selectedOptions.push('option6')"
+                            :class="selectedOptions.includes('option6') ? 'bg-blue-600 text-white' : 'bg-gray-400 text-gray-800'"
+                            class="w-full py-1 rounded">
+                            Option 6
+                        </button>
+                    </div>
+
+                    <div>
+                        <button 
+                            @click="selectedOptions.includes('option7') ? selectedOptions.splice(selectedOptions.indexOf('option7'), 1) : selectedOptions.push('option7')"
+                            :class="selectedOptions.includes('option7') ? 'bg-blue-600 text-white' : 'bg-gray-400 text-gray-800'"
+                            class="w-full py-1 rounded">
+                            Option 7
+                        </button>
+                    </div>
+                    <div>
+                        <button 
+                            @click="selectedOptions.includes('option8') ? selectedOptions.splice(selectedOptions.indexOf('option8'), 1) : selectedOptions.push('option8')"
+                            :class="selectedOptions.includes('option8') ? 'bg-blue-600 text-white' : 'bg-gray-400 text-gray-800'"
+                            class="w-full py-1 rounded">
+                            Option 8
+                        </button>
+                    </div>
+
+                    <div>
+                        <button 
+                            @click="selectedOptions.includes('option9') ? selectedOptions.splice(selectedOptions.indexOf('option9'), 1) : selectedOptions.push('option9')"
+                            :class="selectedOptions.includes('option9') ? 'bg-blue-600 text-white' : 'bg-gray-400 text-gray-800'"
+                            class="w-full py-1 rounded">
+                            Option 9
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Component -->
+        <main class="bg-gray-800 p-6 rounded-lg md:w-3/4">
+            <div class="container mx-auto mb-6 flex justify-between items-center max-w-[960px]">
+                <div class="text-2xl font-bold">
+                    <a href="#" class="text-white"></a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button onclick="window.location.href='index.html'" class="bg-blue-500 text-white px-4 py-2 rounded">Login</button>
+                </div>
+            </div>
+            <!-- Product Cards -->
+            <div class="h-[800px] mt-20">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Example Product Card -->
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <img src="https://i.ibb.co/gVT0CL7/light-pictures-q0m4kf6coolcsubi.jpg" alt="Product Image" class="w-full h-40 object-cover rounded-lg mb-2">
+                        <h2 class=" font-medium mb-1">Product 1</h2>
+                        <p class="text-sm text-gray-400">This is a description of Product 1.</p>
+                        <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">View Details</button>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <img src="https://i.ibb.co/gVT0CL7/light-pictures-q0m4kf6coolcsubi.jpg" alt="Product Image" class="w-full h-40 object-cover rounded-lg mb-2">
+                        <h2 class=" font-medium mb-1">Product 2</h2>
+                        <p class="text-sm text-gray-400">This is a description of Product 2.</p>
+                        <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">View Details</button>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <img src="https://i.ibb.co/gVT0CL7/light-pictures-q0m4kf6coolcsubi.jpg" alt="Product Image" class="w-full h-40 object-cover rounded-lg mb-2">
+                        <h2 class=" font-medium mb-1">Product 3</h2>
+                        <p class="text-sm text-gray-400">This is a description of Product 3.</p>
+                        <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">View Details</button>
+                    </div>
+                </div>
+            </div>
+            
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 py-8 mt-8">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[960px]">
+            <div>
+                <!-- <h2 class="text-xl font-bold mb-4 uppercase">likes light</h2> -->
+                <a href="index.html">
+                    <img class="h-20 mb-10" src="./public/logo3.jpg" alt="">
+                </a>
+                <ul class="text-xl text-white">
+                    <li> 
+                        
+                    </li>
+                    <li><a href="index.html" class=" hover:text-blue-500">User</a></li>
+                    <li><a href="import.html" class=" hover:text-blue-500">Import</a></li>
+                    <li><a href="search.html" class=" hover:text-blue-500">Search</a></li>
+                    <li><a href="article.html" class=" hover:text-blue-500">Article</a></li>
+                    <li><a href="article-edit.html" class=" hover:text-blue-500">Article Edit</a></li>
+                </ul>
+            </div>
+            <div>
+                <h2 class="text-xl font-bold mb-4">Contact Us</h2>
+                <form action="#" method="POST">
+                    <div class="mb-4">
+                        <label for="email" class="block text-sm font-medium">Email</label>
+                        <input type="email" id="footer-email" name="footer-email" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div class="mb-4">
+                        <label for="message" class="block text-sm font-medium">Message</label>
+                        <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
+                    <!-- <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Send</button> -->
+                </form>
+            </div>
+            <div>
+                <h2 class="text-xl font-bold mb-4">Disclaimer</h2>
+                <p class="text-sm">
+                    The information provided on this website is for general informational purposes only. All information on the site is provided in good faith.
+                </p>
+                <h2 class="text-xl font-bold mt-6">Phone</h2>
+                <p class="text-sm">+123 456 7890</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
