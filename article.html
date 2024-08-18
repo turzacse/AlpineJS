@@ -1,11 +1,182 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+    <meta charset="utf-8">
+    <title>Article Info Page</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="./../css/tailwind.css">
     
+    <!-- font awesome  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>[x-cloak] { display: none !important; }</style>
+
+    <!-- Scripts -->
+    <script defer src="https://unpkg.com/@alpinejs/collapse@3.4.2/dist/cdn.min.js"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.4.2/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-900 text-gray-100">
+    <!-- Navbar -->
+    <nav class="bg-gray-800 p-4">
+        <div class="container mx-auto flex justify-between items-center max-w-[960px]">
+            <div class="text-2xl bg-[#FCB900] rounded-md p-1 font-bold">
+                <a href="#" class="text-white">
+                    <img 
+                    class="w-16 h-16 rounded-md shadow-2xl"
+                    src="./public/logo1.jpg" alt="">
+                </a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button
+                onclick="window.location.href='article-edit.html'"
+                >
+                    <i class="fa-solid fa-pen-to-square text-2xl text-[#FCB900]"></i>
+                </button>
+                <!-- <button>
+                    <i class="fa-solid fa-upload text-2xl mr-2"></i>
+                </button> -->
+                <a href="index.html">
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded">Login</button>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Body -->
+    <main class="container mx-auto py-8 max-w-[960px] grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Left Side -->
+        <div class="bg-[#000000] p-6 rounded-lg" x-data="{ tab: 'view', imageIndex: 0, viewImages: ['https://i.ibb.co/fH9d98j/li4.jpg', 'https://i.ibb.co/sm1bv9f/li3.jpg', 'https://i.ibb.co/p0G6TC0/li2.jpg', 'https://i.ibb.co/HYbG21s/li1.jpg'], exampleImages: ['https://i.ibb.co/t8fqDN1/light3.jpg', 'https://i.ibb.co/HHppP1x/light2.jpg', 'https://i.ibb.co/zXNk1vV/light1.jpg'] }">
+            <!-- Tabs -->
+            <div class="flex justify-around mb-4">
+                <button @click="tab = 'view'" :class="{ 'bg-[#FCB900] text-black': tab === 'view' }" class="px-4 py-2 rounded-t-lg">View</button>
+                <button @click="tab = 'tec'" :class="{ 'bg-[#FCB900] text-black': tab === 'tec' }" class="px-4 py-2 rounded-t-lg">TEC</button>
+                <button @click="tab = 'sdk'" :class="{ 'bg-[#FCB900] text-black': tab === 'sdk' }" class="px-4 py-2 rounded-t-lg">SDK</button>
+                <button @click="tab = 'example'" :class="{ 'bg-[#FCB900] text-black': tab === 'example' }" class="px-4 py-2 rounded-t-lg">Example</button>
+            </div>
+        
+            <!-- Image/Content Display -->
+            <div x-show="tab === 'view'">
+                <div class="flex items-center gap-1 mt-4">
+                    <button @click="imageIndex = (imageIndex === 0) ? viewImages.length - 1 : imageIndex - 1" class=" left-0 bg-[#FCB900] text-black p-2 rounded-full"><i class="fas fa-chevron-left"></i></button>
+                    <img :src="viewImages[imageIndex]" alt="Product Image" class="w-80 h-auto rounded-lg shadow-lg">
+                    <button @click="imageIndex = (imageIndex === viewImages.length - 1) ? 0 : imageIndex + 1" class=" right-0 bg-[#FCB900] text-black p-2 rounded-full"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        
+            <!-- <div x-show="tab === 'tec'" class="text-gray-300">
+                <p>Technical details of the product go here...</p>
+            </div> -->
+            <div x-show="tab === 'tec'" class="text-gray-300">
+                <h3 class="text-xl font-bold mb-2">Technical Specifications:</h3>
+                <ul class="list-disc list-inside">
+                    <li><strong>Power Consumption:</strong> 10W</li>
+                    <li><strong>Luminous Flux:</strong> 800 lumens</li>
+                    <li><strong>Color Temperature:</strong> 2700K - 6500K (Warm to Cool White)</li>
+                    <li><strong>CRI:</strong> 90+</li>
+                    <li><strong>Beam Angle:</strong> 120 degrees</li>
+                    <li><strong>Voltage:</strong> AC 100-240V</li>
+                    <li><strong>Material:</strong> Aluminum Alloy and Polycarbonate</li>
+                    <li><strong>Lifespan:</strong> 25,000 hours</li>
+                    <li><strong>Dimensions:</strong> 5.5 x 5.5 x 4.5 inches</li>
+                    <li><strong>Weight:</strong> 0.6 lbs</li>
+                    <li><strong>IP Rating:</strong> IP65 (Water and Dust Resistant)</li>
+                </ul>
+            </div>
+            
+        
+            <!-- <div x-show="tab === 'sdk'" class="text-gray-300">
+                <p>SDK details of the product go here...</p>
+            </div> -->
+            <div x-show="tab === 'sdk'" class="text-gray-300">
+                <h3 class="text-xl font-bold mb-2">Software Development Kit (SDK) Details:</h3>
+                <ul class="list-disc list-inside">
+                    <li><strong>SDK Version:</strong> 2.1.0</li>
+                    <li><strong>Supported Platforms:</strong> iOS, Android, Windows, macOS</li>
+                    <li><strong>Programming Languages:</strong> Swift, Java, Kotlin, C#, Python</li>
+                    <li><strong>API Integration:</strong> RESTful API for remote control and automation</li>
+                    <li><strong>Bluetooth Support:</strong> BLE (Bluetooth Low Energy) for wireless control</li>
+                    <li><strong>Cloud Connectivity:</strong> AWS IoT for secure cloud communication</li>
+                    <li><strong>Real-time Data:</strong> Access to live power usage and status reports</li>
+                    <li><strong>Example Code:</strong> Available on GitHub with detailed documentation</li>
+                    <li><strong>Customizable UI Components:</strong> Pre-built UI elements for quick integration</li>
+                    <li><strong>Developer Support:</strong> 24/7 support via forums and email</li>
+                </ul>
+            </div>
+            
+        
+            <div x-show="tab === 'example'">
+                <div class="flex items-center gap-1">
+                    <button @click="imageIndex = (imageIndex === 0) ? exampleImages.length - 1 : imageIndex - 1" class=" left-0 bg-[#FCB900] text-black p-2 rounded-full"><i class="fas fa-chevron-left"></i></button>
+                    <img :src="exampleImages[imageIndex]" alt="Example Image" class="w-80 h-64 rounded-lg shadow-lg">
+                    <button @click="imageIndex = (imageIndex === exampleImages.length - 1) ? 0 : imageIndex + 1" class=" right-0 bg-[#FCB900] text-black p-2 rounded-full"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- Right Side -->
+        <div class="bg-[#000000] p-6 rounded-lg" x-data="{ tab: 'download' }">
+            <div class="flex justify-around mb-4">
+                <a href="./public/info.pdf" download>
+                    <button>
+                        <i class="fa-solid fa-download text-[#FCB900] text-2xl"></i>
+                    </button>
+                </a>
+                <!-- <button @click="tab = 'edit'" :class="{ 'bg-[#FCB900] text-black': tab === 'edit' }" class="px-4 py-2 rounded-t-lg">
+                    EDIT
+                </button> -->
+                <button
+                onclick="window.location.href='article-edit.html'"
+                >
+                    <i class="fa-solid fa-pen-to-square text-2xl text-[#93D9F7]"></i>
+                </button>
+            </div>
+            <div x-show="tab === 'download'" class="text-gray-300">
+                <iframe src="./public/info.pdf" width="100%" height="350px"></iframe>
+            </div>
+            
+        </div>
+        
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 py-8 mt-8">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[960px]">
+            <div>
+                <div class="p-1 bg-[#FCB900] mb-5 w-56 rounded-md">
+                    <a href="index.html">
+                        <img class="h-20 rounded-md shadow-2xl" src="./public/logo3.jpg" alt="">
+                    </a>
+                </div>
+                <ul class="text-xl text-white">
+                    <li><a href="index.html" class="hover:text-blue-500">User</a></li>
+                    <li><a href="import.html" class="hover:text-blue-500">Import</a></li>
+                    <li><a href="search.html" class="hover:text-blue-500">Search</a></li>
+                    <li><a href="article.html" class="hover:text-blue-500">Article</a></li>
+                    <li><a href="article-edit.html" class="hover:text-blue-500">Article Edit</a></li>
+                </ul>
+            </div>
+            <div>
+                <h2 class="text-xl font-bold mb-4">Contact Us</h2>
+                <form action="#" method="POST">
+                    <div class="mb-4">
+                        <input placeholder="email" type="email" id="footer-email" name="footer-email" class="w-full px-2 py-1 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div class="mb-4">
+                        <textarea placeholder="write your message here..." id="message" name="message" rows="4" class="w-full px-2 py-1 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div>
+                <h2 class="text-xl font-bold mb-4">Disclaimer</h2>
+                <p class="text-sm">
+                    The information provided on this website is for general informational purposes only. All information on the site is provided in good faith.
+                </p>
+                <h2 class="text-xl font-bold mt-6">Phone</h2>
+                <p class="text-sm">+123 456 7890</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
