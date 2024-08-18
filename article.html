@@ -6,11 +6,19 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="./../css/tailwind.css">
+
+     <!-- Google Fonts -->
+     <link href="https://fonts.googleapis.com/css2?family=Muli:wght@300;400;600&display=swap" rel="stylesheet">
     
     <!-- font awesome  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <style>[x-cloak] { display: none !important; }</style>
+    <style>
+        [x-cloak] { display: none !important; }
+        body {
+            font-family: 'Muli', sans-serif;
+        }
+    </style>
 
     <!-- Scripts -->
     <script defer src="https://unpkg.com/@alpinejs/collapse@3.4.2/dist/cdn.min.js"></script>
@@ -18,27 +26,37 @@
 </head>
 <body class="bg-gray-900 text-gray-100">
     <!-- Navbar -->
-    <nav class="bg-gray-800 p-4">
+    <nav class="bg-gray-800 p-2">
         <div class="container mx-auto flex justify-between items-center max-w-[960px]">
             <div class="text-2xl bg-[#FCB900] rounded-md p-1 font-bold">
                 <a href="#" class="text-white">
                     <img 
-                    class="w-16 h-16 rounded-md shadow-2xl"
+                    class="w-10 h-10 rounded-md shadow-2xl"
                     src="./public/logo1.jpg" alt="">
                 </a>
             </div>
             <div class="flex items-center space-x-4">
-                <button
-                onclick="window.location.href='article-edit.html'"
-                >
-                    <i class="fa-solid fa-pen-to-square text-2xl text-[#FCB900]"></i>
+                <button>
+                    <i class="fa-solid fa-xmark text-2xl mr-2 text-red-500"></i>
                 </button>
-                <!-- <button>
+                <button>
                     <i class="fa-solid fa-upload text-2xl mr-2"></i>
-                </button> -->
-                <a href="index.html">
-                    <button class="bg-blue-500 text-white px-4 py-2 rounded">Login</button>
-                </a>
+                </button>
+    
+                <!-- Dropdown -->
+                <div x-data="{ open: false }" class="relative">
+                    <button @click="open = !open" class="focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl text-white"></i>
+                    </button>
+                    <!-- Dropdown menu -->
+                    <div x-show="open" @click.outside="open = false" x-transition class="absolute right-0 mt-2 w-48 bg-[#374151] text-white rounded-md shadow-lg z-20">
+                        <a href="index.html" class="block px-4 py-2  hover:bg-[#FCB900] hover:text-black rounded-md">User</a>
+                        <a href="import.html" class="block px-4 py-2  hover:bg-[#FCB900] hover:text-black rounded-md">Import</a>
+                        <a href="search.html" class="block px-4 py-2  hover:bg-[#FCB900] hover:text-black rounded-md">Search</a>
+                        <a href="article.html" class="block px-4 py-2  hover:bg-[#FCB900] hover:text-black rounded-md">Article</a>
+                        <a href="article-edit.html" class="block px-4 py-2  hover:bg-[#FCB900] hover:text-black rounded-md">Article Edit</a>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -129,7 +147,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 py-4 mt-8">
+    <!-- <footer class="bg-gray-800 py-4 mt-8">
         <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[960px]">
             <div>
                 <div class="p-1 bg-[#FCB900] mb-2 w-28 rounded-md">
@@ -165,6 +183,10 @@
                 <p class="text-sm">+123 456 7890</p>
             </div>
         </div>
+    </footer> -->
+    <footer class="bg-gray-800 py-4 mt-8">
+        <h2 class="text-center text-white">@2024LIXS.CH - contakt - AGB</h2>
     </footer>
+
 </body>
 </html>
