@@ -1,11 +1,1098 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+    <meta charset="utf-8">
+    <title>Edit Article</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="./../css/tailwind.css">
     
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>[x-cloak] { display: none !important; }</style>
+
+    <!-- Scripts -->
+    <script defer src="https://unpkg.com/@alpinejs/collapse@3.4.2/dist/cdn.min.js"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.4.2/dist/cdn.min.js"></script>
+
+    <script>
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('change', () => {
+                const selectedEnvironment = document.querySelector('input[name="environment"]:checked')?.value;
+                const selectedInstallations = [...document.querySelectorAll('input[name="installation"]:checked')].map(el => el.value);
+                const selectedLuminaires = [...document.querySelectorAll('input[name="luminaire"]:checked')].map(el => el.value);
+    
+                // Store the selected values in an object
+                const selectedValues = {
+                    environment: selectedEnvironment,
+                    installations: selectedInstallations,
+                    luminaires: selectedLuminaires
+                };
+    
+                // Save the selected values to local storage or any other storage
+                localStorage.setItem('selectedClassification', JSON.stringify(selectedValues));
+            });
+        });
+    </script>
+</head>
+<body class="bg-gray-900 text-gray-100">
+    <!-- Navbar -->
+    <nav class="bg-gray-800 p-4">
+        <div class="container mx-auto flex justify-between items-center max-w-[960px]">
+            <div class="text-2xl bg-[#FCB900] rounded-md p-1 font-bold">
+                <a href="#" class="text-white">
+                    <img 
+                    class="w-16 h-16 rounded-md shadow-2xl"
+                    src="./public/logo1.jpg" alt="">
+                </a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button onclick="window.location.href='article-edit.html'">
+                    <i class="fa-solid fa-pen-to-square text-2xl text-[#FCB900]"></i>
+                </button>
+                <a href="index.html">
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded">Login</button>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Body -->
+    <main class="container mx-auto py-8 max-w-[960px]">
+        <!-- Page Headline -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold border-b-4 border-[#FCB900] inline-block pb-2">Edit Article</h1>
+        </div>
+
+        <!-- Numbers Section -->
+        <div class="bg-gray-800 p-6 rounded-lg mb-8">
+            <!-- 1st part  -->
+            <div class="border-2 border-[#b8d9f5] p-4 rounded-lg">
+                <h2 class="text-2xl font-bold mb-4 bg-[#FCB900] text-black p-2 rounded">Numbers</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <div>
+                        <label for="l-number" class="block text-sm font-medium mb-2">L-Number</label>
+                        <input type="text" id="l-number" name="l-number" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="hr-number" class="block text-sm font-medium mb-2">HR-Number</label>
+                        <input type="text" id="hr-number" name="hr-number" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="netto-number" class="block text-sm font-medium mb-2">Netto-Number</label>
+                        <input type="text" id="netto-number" name="netto-number" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="alternative-number" class="block text-sm font-medium mb-2">Alternative-Number</label>
+                        <input type="text" id="alternative-number" name="alternative-number" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2nd part  -->
+            <div class="border-2 border-[#b8d9f5] p-4 rounded-lg mt-8">
+                <h2 class="text-2xl font-bold mb-4 bg-[#FCB900] text-black p-2 rounded">Descriptions</h2>
+                <div class="grid grid-cols-1 gap-4">
+                    <div>
+                        <label for="short-description" class="block text-sm font-medium mb-2">Short Description* </label>
+                        <textarea required id="short-description" name="short-description" rows="2" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
+                    <div>
+                        <label for="long-description" class="block text-sm font-medium mb-2">Long Description*</label>
+                        <textarea required id="long-description" name="long-description" rows="4" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
+                    <div>
+                        <label for="tender-text" class="block text-sm font-medium mb-2">Tender Text*</label>
+                        <textarea required id="tender-text" name="tender-text" rows="4" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3rd part  -->
+            <div class="border-2 border-[#b8d9f5] p-4 rounded-lg mt-8">
+                <h2 class="text-2xl font-bold mb-4 bg-[#FCB900] text-black p-2 rounded">Classification</h2>
+                
+                <!-- Environment Radio Options -->
+                <div class="mb-4"> 
+                    <label class="block text-lg font-bold mb-2">Environment</label> <hr class="mb-2">
+                    <div class="flex justify-between">
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="environment" value="Indoor" class="form-radio text-blue-500">
+                            <span class="ml-2">Indoor</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="environment" value="Outdoor" class="form-radio text-blue-500">
+                            <span class="ml-2">Outdoor</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="environment" value="Indoor-Outdoor" class="form-radio text-blue-500">
+                            <span class="ml-2">Indoor-Outdoor</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Installation Checkbox Options -->
+                <div class="mb-4">
+                    <label class="block text-lg font-bold mb-2">Installation</label> <hr class="mb-2">
+                    <div class="grid grid-cols-3 gap-4">
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="installation" value="Wall" class="form-checkbox rounded-md text-blue-500">
+                            <span class="ml-2">Wall</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="installation" value="Floor" class="form-checkbox rounded-md text-blue-500">
+                            <span class="ml-2">Floor</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="installation" value="Table" class="form-checkbox rounded-md text-blue-500">
+                            <span class="ml-2">Table</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="installation" value="Selling" class="form-checkbox rounded-md text-blue-500">
+                            <span class="ml-2">Selling</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="installation" value="Power Rail" class="form-checkbox rounded-md text-blue-500">
+                            <span class="ml-2">Power Rail</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Luminaire Type Checkbox Options -->
+                <div class="mb-4">
+                    <label class="block text-lg font-bold mb-2">Luminaire Type</label>
+                    <hr class="mb-2">
+                    <div class="grid grid-cols-3 gap-4">
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="luminaire" value="Semi Recessed" class="form-checkbox rounded-sm text-blue-500">
+                            <span class="ml-2">Semi Recessed</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="luminaire" value="Floor" class="form-checkbox rounded-sm text-blue-500">
+                            <span class="ml-2">Floor</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="luminaire" value="Down Light" class="form-checkbox rounded-sm text-blue-500">
+                            <span class="ml-2">Down Light</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="luminaire" value="Cable Pendant" class="form-checkbox rounded-sm text-blue-500">
+                            <span class="ml-2">Cable Pendant</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="luminaire" value="Outdoor" class="form-checkbox rounded-sm text-blue-500">
+                            <span class="ml-2">Outdoor</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="luminaire" value="Recessed" class="form-checkbox rounded-sm text-blue-500">
+                            <span class="ml-2">Recessed</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="luminaire" value="Suspended" class="form-checkbox rounded-sm text-blue-500">
+                            <span class="ml-2">Suspended</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="luminaire" value="Tube Pendant" class="form-checkbox rounded-sm text-blue-500">
+                            <span class="ml-2">Tube Pendant</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="luminaire" value="Chains Pendant" class="form-checkbox rounded-sm text-blue-500">
+                            <span class="ml-2">Chains Pendant</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="luminaire" value="Spot Light" class="form-checkbox rounded-sm text-blue-500">
+                            <span class="ml-2">Spot Light</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="luminaire" value="Head Light" class="form-checkbox rounded-sm text-blue-500">
+                            <span class="ml-2">Head Light</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="luminaire" value="Safety Light" class="form-checkbox rounded-sm text-blue-500">
+                            <span class="ml-2">Safety Light</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="luminaire" value="Power Rail" class="form-checkbox rounded-sm text-blue-500">
+                            <span class="ml-2">Power Rail</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="luminaire" value="Profile Luminaire" class="form-checkbox rounded-sm text-blue-500">
+                            <span class="ml-2">Profile Luminaire</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="luminaire" value="System Luminaire" class="form-checkbox rounded-sm text-blue-500">
+                            <span class="ml-2">System Luminaire</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="luminaire" value="Special Luminaire" class="form-checkbox rounded-sm text-blue-500">
+                            <span class="ml-2">Special Luminaire</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="luminaire" value="Acoustic Luminaire" class="form-checkbox rounded-sm text-blue-500">
+                            <span class="ml-2">Acoustic Luminaire</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="luminaire" value="High Bay Luminaire" class="form-checkbox rounded-sm text-blue-500">
+                            <span class="ml-2">High Bay Luminaire</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="luminaire" value="Bollard Luminaire" class="form-checkbox rounded-sm text-blue-500">
+                            <span class="ml-2">Bollard Luminaire</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="luminaire" value="Light Bands" class="form-checkbox rounded-sm text-blue-500">
+                            <span class="ml-2">Light Bands</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="luminaire" value="Light Strips" class="form-checkbox rounded-sm text-blue-500">
+                            <span class="ml-2">Light Strips</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="luminaire" value="Clean Room" class="form-checkbox rounded-sm text-blue-500">
+                            <span class="ml-2">Clean Room</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="luminaire" value="Light Management" class="form-checkbox rounded-sm text-blue-500">
+                            <span class="ml-2">Light Management</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="luminaire" value="Higher Protection Class" class="form-checkbox rounded-sm text-blue-500">
+                            <span class="ml-2">Higher Protection Class</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4th part  -->
+            <div class="border-2 border-[#b8d9f5] p-4 rounded-lg mt-8">
+                <h2 class="text-2xl font-bold mb-4 bg-[#FCB900] text-black p-2 rounded">Technical</h2>
+            
+                <!-- Measure Section -->
+                <div class="mb-4">
+                    <label class="block text-lg font-bold mb-1">Measure</label>
+                    <hr class="mb-2">
+                    <div class="grid grid-cols-3 gap-4">
+                        <div>
+                            <label for="" class="block text-sm font-medium mb-2">Length (mm)</label>
+                            <input type="number" name="length" placeholder="Length (mm)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="" class="block text-sm font-medium mb-2">Width (mm)</label>
+                            <input type="number" name="width" placeholder="Width (mm)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="" class="block text-sm font-medium mb-2">Diameter (mm)</label>
+                            <input type="number" name="diameter" placeholder="Diameter (mm)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="" class="block text-sm font-medium mb-2">Height (mm)</label>
+                            <input type="number" name="height" placeholder="Height (mm)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="" class="block text-sm font-medium mb-2">Weight (g)</label>
+                            <input type="number" name="weight" placeholder="Weight (g)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- Cutout Section -->
+                <div class="mb-4">
+                    <label class="block text-lg font-bold mb-2">Cutout</label> <hr class="mb-2">
+                    <div class="grid grid-cols-3 gap-4">
+                        <div>
+                            <label for="" class="block text-sm font-medium mb-2">Cutout Lenght (mm)</label>
+                            <input type="number" name="cutout-length" placeholder="Cutout Length (mm)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="" class="block text-sm font-medium mb-2">Cutout Width (mm)</label>
+                            <input type="number" name="cutout-width" placeholder="Cutout Width (mm)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="" class="block text-sm font-medium mb-2">Cutout Diameter (mm)</label>
+                            <input type="number" name="cutout-diameter" placeholder="Cutout Diameter (mm)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="" class="block text-sm font-medium mb-2">Cutout Depth (mm)</label>
+                            <input type="number" name="cutout-depth" placeholder="Cutout Depth (mm)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- Electrical Section -->
+                <div class="mb-4">
+                    <label class="block text-lg font-bold mb-2">Electrical</label> <hr class="mb-2">
+                    <div class="grid grid-cols-3 gap-4">
+                        <div>
+                            <label for="" class="block text-sm font-medium mb-2">Power (W)</label>
+                        <input type="number" name="power" placeholder="Power (W)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="" class="block text-sm font-medium mb-2">Current (mA)</label>
+                        <input type="number" name="current" placeholder="Current (mA)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="" class="block text-sm font-medium mb-2">c10</label>
+                        <input type="number" name="c10" placeholder="C10" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="" class="block text-sm font-medium mb-2">B10</label>
+                        <input type="number" name="b10" placeholder="B10" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="" class="block text-sm font-medium mb-2">C16</label>
+                        <input type="number" name="c16" placeholder="C16" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="" class="block text-sm font-medium mb-2">B16</label>
+                        <input type="number" name="b16" placeholder="B16" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="" class="block text-sm font-medium mb-2">Power Factor (cos ∅)</label>
+                        <input type="number" name="power-factor" placeholder="Power Factor (cos ∅)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="" class="block text-sm font-medium mb-2">Surge Protection</label>
+                        <input type="number" name="surge-protection" placeholder="Surge Protection" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- Electrical Checkbox Section -->
+                <div class="my-4 mt-10">
+                    <!-- <label class="block text-sm font-medium mb-2">Electrical Options</label> -->
+                    <div class="grid grid-cols-3 gap-4">
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="electrical" value="230V ~" class="form-checkbox text-blue-500">
+                            <span class="ml-2">230V ~</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="electrical" value="24V =" class="form-checkbox text-blue-500">
+                            <span class="ml-2">24V =</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="electrical" value="48V =" class="form-checkbox text-blue-500">
+                            <span class="ml-2">48V =</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="electrical" value="Constant Voltage" class="form-checkbox text-blue-500">
+                            <span class="ml-2">Constant Voltage</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="electrical" value="Constant Current" class="form-checkbox text-blue-500">
+                            <span class="ml-2">Constant Current</span>
+                        </label>
+                    </div>
+                </div>
+            
+                <!-- Device Type Radio Section -->
+                <div class="mb-4">
+                    <label class="block text-lg font-bold mb-2">Device Type</label> <hr class="mb-2">
+                    <div class="flex justify-between gap-4">
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="device-type" value="DT One" class="form-radio text-blue-500">
+                            <span class="ml-2">DT One</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="device-type" value="DT Two" class="form-radio text-blue-500">
+                            <span class="ml-2">DT Two</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="device-type" value="DT Three" class="form-radio text-blue-500">
+                            <span class="ml-2">DT Three</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="device-type" value="DT Four" class="form-radio text-blue-500">
+                            <span class="ml-2">DT Four</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="device-type" value="DT Five" class="form-radio text-blue-500">
+                            <span class="ml-2">DT Five</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="device-type" value="DT Six" class="form-radio text-blue-500">
+                            <span class="ml-2">DT Six</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="device-type" value="DT Seven" class="form-radio text-blue-500">
+                            <span class="ml-2">DT Seven</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="device-type" value="DT Eight" class="form-radio text-blue-500">
+                            <span class="ml-2">DT Eight</span>
+                        </label>
+                    </div>
+                </div>
+            
+                <!-- Technical Fields Section -->
+                <div class="mb-4">
+                    <label class="block text-lg font-bold mb-2">Technical</label> <hr class="mb-2">
+                    <div class="grid grid-cols-3 gap-4">
+                        <div>
+                            <label for="" class="block text-sm font-medium mb-2">Max Temperature (°C)</label>
+                        <input type="number" name="max-temperature" placeholder="Max Temperature (°C)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="" class="block text-sm font-medium mb-2">Min Temperature (°C)</label>
+                        <input type="number" name="min-temperature" placeholder="Min Temperature (°C)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                       <div>
+                        <label for="" class="block text-sm font-medium mb-2">Filament (°C)</label>
+                        <input type="number" name="filament" placeholder="Filament (°C)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                       </div>
+                        <div>
+                            <label for="ip" class="block text-sm font-medium mb-2">IP</label>
+                        <input type="number" name="ip" placeholder="IP" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+
+
+                        <div>
+                            <label for="ik" class="block text-sm font-medium mb-2">IK</label>
+                            <select id="ik" name="ik" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="" disabled selected>Select IK</option>
+                                <option value="IK01">IK01</option>
+                                <option value="IK02">IK02</option>
+                                <option value="IK03">IK03</option>
+                                <option value="IK04">IK04</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </div>
+                        <div>
+                            <label for="protection-class" class="block text-sm font-medium mb-2">Protection Class</label>
+                            <select id="protection-class" name="protection-class" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="" disabled selected>Select Protection Class</option>
+                                <option value="Class I">Class I</option>
+                                <option value="Class II">Class II</option>
+                                <option value="Class III">Class III</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </div>
+                    </div>
+                    
+                </div>
+            
+                <!-- Special Type Section -->
+                <div class="mb-4">
+                    <label class="block text-lg font-bold mb-2">Special Type</label> <hr class="mb-2">
+                    <div class="grid grid-cols-3 gap-4">
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="special-type" value="Ball Proof" class="form-checkbox text-blue-500">
+                            <span class="ml-2">Ball Proof</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="special-type" value="Camera" class="form-checkbox text-blue-500">
+                            <span class="ml-2">Camera</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="special-type" value="Explosion Light" class="form-checkbox text-blue-500">
+                            <span class="ml-2">Explosion Light</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="special-type" value="Zone 1/21" class="form-checkbox text-blue-500">
+                            <span class="ml-2">Zone 1/21</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="special-type" value="Zone 2/22" class="form-checkbox text-blue-500">
+                            <span class="ml-2">Zone 2/22</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="special-type" value="Emergency Light" class="form-checkbox text-blue-500">
+                            <span class="ml-2">Emergency Light</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="special-type" value="1h" class="form-checkbox text-blue-500">
+                            <span class="ml-2">1h</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="special-type" value="3h" class="form-checkbox text-blue-500">
+                            <span class="ml-2">3h</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="special-type" value="Self Test" class="form-checkbox text-blue-500">
+                            <span class="ml-2">Self Test</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="special-type" value="No Self Test" class="form-checkbox text-blue-500">
+                            <span class="ml-2">No Self Test</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5th part  -->
+            <div class="border-2 border-[#b8d9f5] p-4 rounded-lg mt-8">
+                <h2 class="text-2xl font-bold mb-4 bg-[#FCB900] text-black p-2 rounded">Light</h2>
+            
+                <!-- Direct Section -->
+                <div class="mb-4">
+                    <label class="block text-lg font-bold mb-2">Direct</label> <hr class="mb-2">
+                    <div class="grid grid-cols-3 gap-4 mb-4">
+                        <div>
+                            <label for="" class="block text-sm font-medium mb-2">Direct (%)</label>
+                        <input type="number" name="direct-percent" placeholder="Direct (%)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="" class="block text-sm font-medium mb-2">Beam Angle (°)</label>
+                        <input type="number" name="beam-angle-1" placeholder="Beam Angle (°)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="" class="block text-sm font-medium mb-2">Beam Angle 2 (°)</label>
+                        <input type="number" name="beam-angle-2" placeholder="Beam Angle 2 (°)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="" class="block text-sm font-medium mb-2">UGR (>)</label>
+                        <input type="number" name="ugr" placeholder="UGR (<)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                    </div>
+            
+                    <!-- Direct Radio Options -->
+                    <div class="grid grid-cols-3 gap-4">
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="direct-type" value="Transparent" class="form-radio text-blue-500">
+                            <span class="ml-2">Transparent</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="direct-type" value="Opal" class="form-radio text-blue-500">
+                            <span class="ml-2">Opal</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="direct-type" value="Lens" class="form-radio text-blue-500">
+                            <span class="ml-2">Lens</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="direct-type" value="Reflector" class="form-radio text-blue-500">
+                            <span class="ml-2">Reflector</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="direct-type" value="Omnidirectional" class="form-radio text-blue-500">
+                            <span class="ml-2">Omnidirectional</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="direct-type" value="Microprisma" class="form-radio text-blue-500">
+                            <span class="ml-2">Microprisma</span>
+                        </label>
+                    </div>
+                </div>
+            
+                <!-- Indirect Section (same as Direct) -->
+                <div class="mb-4">
+                    <label class="block text-lg font-bold mb-2">Indirect</label> <hr class="mb-2">
+                    <div class="grid grid-cols-3 gap-4 mb-4">
+                        <div>
+                            <label for="" class="block text-sm font-medium mb-2">Indirect (%)</label>
+                        <input type="number" name="indirect-percent" placeholder="Indirect (%)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="" class="block text-sm font-medium mb-2">Beam Angle (°)</label>
+                        <input type="number" name="indirect-beam-angle-1" placeholder="Beam Angle (°)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="" class="block text-sm font-medium mb-2">Beam Angle 2 (°)</label>
+                        <input type="number" name="indirect-beam-angle-2" placeholder="Beam Angle 2 (°)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="" class="block text-sm font-medium mb-2">UGR (>)</label>
+                        <input type="number" name="indirect-ugr" placeholder="UGR (<)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                    </div>
+            
+                    <!-- Indirect Radio Options -->
+                    <div class="grid grid-cols-3 gap-4">
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="direct-type" value="Transparent" class="form-radio text-blue-500">
+                            <span class="ml-2">Transparent</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="direct-type" value="Opal" class="form-radio text-blue-500">
+                            <span class="ml-2">Opal</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="direct-type" value="Lens" class="form-radio text-blue-500">
+                            <span class="ml-2">Lens</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="direct-type" value="Reflector" class="form-radio text-blue-500">
+                            <span class="ml-2">Reflector</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="direct-type" value="Omnidirectional" class="form-radio text-blue-500">
+                            <span class="ml-2">Omnidirectional</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="direct-type" value="Microprisma" class="form-radio text-blue-500">
+                            <span class="ml-2">Microprisma</span>
+                        </label>
+                    </div>
+                </div>
+            
+                <!-- Light Section -->
+                <div class="my-4">
+                    <label class="block text-lg font-bold mb-2">Light</label> <hr class="mb-2">
+                    <div class="grid grid-cols-3 gap-4 mb-4">
+                        <div>
+                            <label for="luminaire-flux" class="block text-sm font-medium mb-2">Luminaire Flux (lm)</label>
+                            <input type="number" id="luminaire-flux" name="luminaire-flux" placeholder="Luminaire Flux (lm)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="efficiency" class="block text-sm font-medium mb-2">Efficiency (lm/W)</label>
+                            <input type="number" id="efficiency" name="efficiency" placeholder="Efficiency (lm/W)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="cri" class="block text-sm font-medium mb-2">CRI (>)</label>
+                            <input type="number" id="cri" name="cri" placeholder="CRI (>)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="hour" class="block text-sm font-medium mb-2">Hour (h)</label>
+                            <input type="number" id="hour" name="hour" placeholder="Hour (h)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="mac-adam" class="block text-sm font-medium mb-2">Mac Adam</label>
+                            <select id="mac-adam" name="mac-adam" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="s">Please Select</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="eei" class="block text-sm font-medium mb-2">EEI</label>
+                            <select id="eei" name="eei" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="s">Please Select</option>
+                                <option value="1">A</option>
+                                <option value="2">B</option>
+                                <option value="3">C</option>
+                                <option value="4">D</option>
+                                <option value="5">E</option>
+                                <option value="6">F</option>
+                                <option value="7">G</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="l-value" class="block text-sm font-medium mb-2">L Value</label>
+                            <select id="l-value" name="l-value" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="s">Please Select</option>
+                                <option value="1">100</option>
+                                <option value="2">200</option>
+                                <option value="3">300</option>
+                                <option value="4">400</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="b-value" class="block text-sm font-medium mb-2">B Value</label>
+                            <select id="b-value" name="b-value" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="s">Please Select</option>
+                                <option value="1">100</option>
+                                <option value="2">200</option>
+                                <option value="3">300</option>
+                                <option value="4">400</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="c-value" class="block text-sm font-medium mb-2">C Value</label>
+                            <select id="c-value" name="c-value" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="s">Please Select</option>
+                                <option value="1">100</option>
+                                <option value="2">200</option>
+                                <option value="3">300</option>
+                                <option value="4">400</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controls Section -->
+                <div class="mb-4">
+                    <label class="block text-lg font-bold mb-2">Controls</label> <hr class="mb-2">
+                    <div class="grid grid-cols-3 gap-4 font-bold">
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="controls" value="On/Off" class="form-checkbox text-blue-500 rounded-md">
+                            <span class="ml-2">On/Off</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="controls" value="Phase Section" class="form-checkbox text-blue-500 rounded-md">
+                            <span class="ml-2">Phase Section</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="controls" value="1-10V" class="form-checkbox text-blue-500 rounded-md">
+                            <span class="ml-2">1-10V</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="controls" value="Dali" class="form-checkbox text-blue-500 rounded-md">
+                            <span class="ml-2">Dali</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="controls" value="Dali Two" class="form-checkbox text-blue-500 rounded-md">
+                            <span class="ml-2">Dali Two</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="controls" value="Touch Dim" class="form-checkbox text-blue-500 rounded-md">
+                            <span class="ml-2">Touch Dim</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="controls" value="Matter" class="form-checkbox text-blue-500 rounded-md">
+                            <span class="ml-2">Matter</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="controls" value="Bluetooth" class="form-checkbox text-blue-500 rounded-md">
+                            <span class="ml-2">Bluetooth</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="controls" value="DMX" class="form-checkbox text-blue-500 rounded-md">
+                            <span class="ml-2">DMX</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Sensors Section -->
+                <div class="mb-4">
+                    <label class="block text-lg font-bold mb-2">Sensors</label> <hr class="mb-2">
+                    <div class="grid grid-cols-3 gap-4 font-bold">
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="sensors" value="HF Integrated" class="form-checkbox text-blue-500 rounded-md">
+                            <span class="ml-2">HF Integrated</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="sensors" value="HF Extendable" class="form-checkbox text-blue-500 rounded-md">
+                            <span class="ml-2">HF Extendable</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="sensors" value="PIR Integrated" class="form-checkbox text-blue-500 rounded-md">
+                            <span class="ml-2">PIR Integrated</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="sensors" value="PIR Extendable" class="form-checkbox text-blue-500 rounded-md">
+                            <span class="ml-2">PIR Extendable</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="sensors" value="LUX Integrated" class="form-checkbox text-blue-500 rounded-md">
+                            <span class="ml-2">LUX Integrated</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="sensors" value="LUX Extendable" class="form-checkbox text-blue-500 rounded-md">
+                            <span class="ml-2">LUX Extendable</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Color Temperature Section -->
+                <div class="mb-4">
+                    <label class="block text-lg font-bold mb-2">Color Temperature</label> <hr class="mb-2">
+                    <div class="grid grid-cols-3 gap-4 mb-4">
+                        <select name="color-1" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="" >Please select</option>
+                            <option value="1">100</option>
+                            <option value="2">120</option>
+                            <option value="3">150</option>
+                            <option value="4">180</option>
+                            <option value="5">200</option>
+                            <!-- Add options for color temperature -->
+                        </select>
+                        <select name="color-2" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="" >Please select</option>
+                            <option value="1">100</option>
+                            <option value="2">120</option>
+                            <option value="3">150</option>
+                            <option value="4">180</option>
+                            <option value="5">200</option>
+                            <!-- Add options for color temperature -->
+                        </select>
+                        <select name="color-3" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="" >Please select</option>
+                            <option value="1">100</option>
+                            <option value="2">120</option>
+                            <option value="3">150</option>
+                            <option value="4">180</option>
+                            <option value="5">200</option>
+                            <!-- Add options for color temperature -->
+                        </select>
+                        <select name="color-4" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="" >Please select</option>
+                            <option value="1">100</option>
+                            <option value="2">120</option>
+                            <option value="3">150</option>
+                            <option value="4">180</option>
+                            <option value="5">200</option>
+                            <!-- Add options for color temperature -->
+                        </select>
+                    </div>
+
+                    <!-- Color Temperature Checkboxes -->
+                    <div class="grid grid-cols-3 my-10 font-semibold gap-4">
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="color-temp-options" value="RGB" class="form-checkbox text-blue-500 rounded-md">
+                            <span class="ml-2">RGB</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="color-temp-options" value="Switchable" class="form-checkbox text-blue-500 rounded-md">
+                            <span class="ml-2">Switchable</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="color-temp-options" value="DTW" class="form-checkbox text-blue-500 rounded-md">
+                            <span class="ml-2">DTW</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="color-temp-options" value="TW" class="form-checkbox text-blue-500 rounded-md">
+                            <span class="ml-2">TW</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Output Section -->
+                <div class="mb-4">
+                    <label class="block text-lg font-bold mb-2">Output</label> <hr class="mb-2">
+                    <div class="flex justify-between font-semibold gap-4">
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="output" value="Ultra Low" class="form-radio text-blue-500">
+                            <span class="ml-2">Ultra Low</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="output" value="Low" class="form-radio text-blue-500">
+                            <span class="ml-2">Low</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="output" value="Medium" class="form-radio text-blue-500">
+                            <span class="ml-2">Medium</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="output" value="High" class="form-radio text-blue-500">
+                            <span class="ml-2">High</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="output" value="Very High" class="form-radio text-blue-500">
+                            <span class="ml-2">Very High</span>
+                        </label>
+                    </div>
+                </div>
+           </div>
+
+           <!-- 6th part  -->
+           <div class="border-2 border-[#b8d9f5] p-4 mt-8 font-semibold rounded-lg ">
+            <h2 class="text-2xl font-bold mb-4 bg-[#FCB900] text-black p-2 rounded">Housing</h2>
+            <div class="grid grid-cols-6 gap-4">
+                <div class="flex items-center">
+                    <input type="radio" id="aluminum" name="housing" value="Aluminum" class="mr-2">
+                    <label for="aluminum" class="text-sm">Aluminum</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="radio" id="copper" name="housing" value="Copper" class="mr-2">
+                    <label for="copper" class="text-sm">Copper</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="radio" id="plastic" name="housing" value="Plastic" class="mr-2">
+                    <label for="plastic" class="text-sm">Plastic</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="radio" id="stainless-steel" name="housing" value="Stainless Steel" class="mr-2">
+                    <label for="stainless-steel" class="text-sm">Stainless Steel</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="radio" id="steel" name="housing" value="Steel" class="mr-2">
+                    <label for="steel" class="text-sm">Steel</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="radio" id="cast-iron" name="housing" value="Cast Iron" class="mr-2">
+                    <label for="cast-iron" class="text-sm">Cast Iron</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="radio" id="stone" name="housing" value="Stone" class="mr-2">
+                    <label for="stone" class="text-sm">Stone</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="radio" id="glass" name="housing" value="Glass" class="mr-2">
+                    <label for="glass" class="text-sm">Glass</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="radio" id="wood" name="housing" value="Wood" class="mr-2">
+                    <label for="wood" class="text-sm">Wood</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="radio" id="porcelain" name="housing" value="Porcelain" class="mr-2">
+                    <label for="porcelain" class="text-sm">Porcelain</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="radio" id="zamac" name="housing" value="Zamac" class="mr-2">
+                    <label for="zamac" class="text-sm">Zamac</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="radio" id="iron" name="housing" value="Iron" class="mr-2">
+                    <label for="iron" class="text-sm">Iron</label>
+                </div>
+            </div>
+           </div>
+
+           <!-- 7th part  -->
+           <div class="border-2 border-[#b8d9f5] mt-8 p-4 rounded-lg mt-8">
+            <h2 class="text-2xl font-bold mb-4 bg-[#FCB900] text-black p-2 rounded">Trading</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="manufacturer" class="block text-sm font-medium mb-2">Manufacturer</label>
+                    <select id="manufacturer" name="manufacturer" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option>Please select</option>
+                        <option>Performance In Lighting</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="manufacturer-article-number" class="block text-sm font-medium mb-2">Manufacturer Article Number</label>
+                    <input type="number" id="manufacturer-article-number" name="manufacturer-article-number" placeholder="Manufacturer Article Number" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="retailer" class="block text-sm font-medium mb-2">Retailer</label>
+                    <select id="retailer" name="retailer" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option>Please select</option>
+                        <option>Performance In Lighting</option>
+                        <option>Others</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="retailer-article-number" class="block text-sm font-medium mb-2">Retailer Article Number</label>
+                    <input type="number" id="retailer-article-number" name="retailer-article-number" placeholder="Retailer Article Number" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="pp-chf" class="block text-sm font-medium mb-2">PP (CHF)</label>
+                    <input type="number" id="pp-chf" name="pp-chf" placeholder="PP (CHF)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="pp-euro" class="block text-sm font-medium mb-2">PP (€)</label>
+                    <input type="number" id="pp-euro" name="pp-euro" placeholder="PP (€)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="sp-chf" class="block text-sm font-medium mb-2">SP (CHF)</label>
+                    <input type="number" id="sp-chf" name="sp-chf" placeholder="SP (CHF)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="delivery-time" class="block text-sm font-medium mb-2">Delivery Time (Days)</label>
+                    <input type="number" id="delivery-time" name="delivery-time" placeholder="Delivery Time (Days)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class=" flex items-center">
+                    <input type="checkbox" id="web-shop" name="web-shop" class="mr-2 rounded-md">
+                    <label for="web-shop" class="text-sm">Web-shop</label>
+                </div>
+                <div class=" flex items-center">
+                    <input type="checkbox" id="netto" name="netto" class="mr-2 rounded-md">
+                    <label for="netto" class="text-sm">Netto</label>
+                </div>
+            </div>
+           </div>
+
+           <!-- 8th part  -->
+           <div class="border-2 border-[#b8d9f5] p-4 rounded-lg mt-8">
+            <h2 class="text-2xl font-bold mb-4 bg-[#FCB900] text-black p-2 rounded">Color</h2>
+            <div class="grid grid-cols-3 gap-4 mb-4">
+                <div>
+                    <label for="l-color" class="block text-sm font-medium mb-2">L-Color</label>
+                    <select id="l-color" name="l-color" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option>Please Select</option>
+                        <!-- Add other color options here if needed -->
+                    </select>
+                </div>
+                <div>
+                    <label for="manufacturer-color" class="block text-sm font-medium mb-2">Manufacturer-Color</label>
+                    <select id="manufacturer-color" name="manufacturer-color" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option>Please Select</option>
+                        <option>Red</option>
+                        <option>Blue</option>
+                        <option>Green</option>
+                        <option>Yellow</option>
+                        <option>Black</option>
+                        <option>White</option>
+                        <!-- Add more colors as needed -->
+                    </select>
+                </div>
+                <div>
+                    <label for="ral-value" class="block text-sm font-medium mb-2">RAL Value</label>
+                    <input type="number" id="ral-value" name="ral-value" placeholder="RAL Value" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+            </div>
+            <div class="mb-4">
+                <label class="block text-lg font-bold mb-2">Finish</label> <hr class="mb-2">
+                <div class="flex justify-between font-semibold space-x-4">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="mat" name="finish" value="Mat" class="mr-2 rounded-md">
+                        <label for="mat" class="text-sm">Mat</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="glossy" name="finish" value="Glossy" class="mr-2 rounded-md">
+                        <label for="glossy" class="text-sm">Glossy</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="brushed" name="finish" value="Brushed" class="mr-2 rounded-md">
+                        <label for="brushed" class="text-sm">Brushed</label>
+                    </div>
+                </div>
+            </div>
+           </div>
+
+           <!-- 9th part  -->
+           <div class="border-2 border-[#b8d9f5] p-4 rounded-lg my-8">
+            <h2 class="text-2xl font-bold mb-4 bg-[#FCB900] text-black p-2 rounded">Logistics</h2>
+            <div class="grid grid-cols-3 gap-4 mb-4">
+                <div>
+                    <label for="packaging-length" class="block text-sm font-medium mb-2">Packaging Length (mm)</label>
+                    <input type="number" id="packaging-length" name="packaging-length" placeholder="Packaging Length (mm)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="packaging-width" class="block text-sm font-medium mb-2">Packaging Width (mm)</label>
+                    <input type="number" id="packaging-width" name="packaging-width" placeholder="Packaging Width (mm)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="packaging-height" class="block text-sm font-medium mb-2">Packaging Height (mm)</label>
+                    <input type="number" id="packaging-height" name="packaging-height" placeholder="Packaging Height (mm)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="packaging-weight" class="block text-sm font-medium mb-2">Packaging Weight (g)</label>
+                    <input type="number" id="packaging-weight" name="packaging-weight" placeholder="Packaging Weight (g)" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+            </div>
+           </div>
+   
+           <div class="flex items-center">
+            <input type="checkbox" id="save" name="finish" value="save" class="mr-2 rounded-sm">
+            <label for="save" class="text-sm">Save as a new version</label>
+           </div>
+           <button class="bg-blue-500 py-2 w-full text-center rounded-md mt-4 hover:bg-blue-800 mb-4">Edit Article</button>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 py-4 mt-8">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[960px]">
+            <div>
+                <div class="p-1 bg-[#FCB900] mb-2 w-28 rounded-md">
+                    <a href="index.html">
+                        <img class="h-10 rounded-md shadow-2xl" src="./public/logo3.jpg" alt="">
+                    </a>
+                </div>
+                <ul class="text-sm text-white">
+                    <li><a href="index.html" class="hover:text-blue-500">User</a></li>
+                    <li><a href="import.html" class="hover:text-blue-500">Import</a></li>
+                    <li><a href="search.html" class="hover:text-blue-500">Search</a></li>
+                    <li><a href="article.html" class="hover:text-blue-500">Article</a></li>
+                    <li><a href="article-edit.html" class="hover:text-blue-500">Article Edit</a></li>
+                </ul>
+            </div>
+            <div>
+                <h2 class="text-xl font-bold mb-2">Contact Us</h2>
+                <form action="#" method="POST">
+                    <div class="mb-4">
+                        <input placeholder="email" type="email" id="footer-email" name="footer-email" class="w-full px-2 py-1 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div class="mb-4">
+                        <textarea placeholder="write your message here..." id="message" name="message" rows="2" class="w-full px-2 py-1 rounded bg-gray-700 border border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div>
+                <h2 class="text-xl font-bold mb-2">Disclaimer</h2>
+                <p class="text-sm">
+                    The information provided on this website is for general informational purposes only.
+                </p>
+                <h2 class="text-xl font-bold mt-3">Phone</h2>
+                <p class="text-sm">+123 456 7890</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
