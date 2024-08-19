@@ -5,9 +5,12 @@ module.exports = {
     './*.html',
     './pages/**/*.html'
   ],
+  darkMode: 'media',
   theme: {
     extend: {
       colors: {
+        'primary-dark': '#000000',
+        'primary-light': '#ffffff',
         "primary": "#1f4b8e",
         "primary-dark": "#102a52",
         "secondary": "#182430",
